@@ -12,8 +12,19 @@ public class Aviones {
     public ArrayList<Avion> getPorTipo(int tipoAvion) {
         ArrayList<Avion> res = new ArrayList<>();
         for(var avion : listaAviones) {
-            res.add(avion);
+            if(avion.getTipoAvion() == tipoAvion) {
+                res.add(avion);
+            }
         }
         return res;
+    }
+    public boolean avionExiste(String matricula) {
+        boolean ans = false;
+        for(var avion: listaAviones) {
+            if(avion.getMatricula().equals(matricula)) {
+                ans = true;
+            }
+        }
+        return ans;
     }
 }

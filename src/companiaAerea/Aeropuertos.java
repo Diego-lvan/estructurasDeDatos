@@ -13,4 +13,23 @@ public class Aeropuertos {
         return listaAeropuertos.add(aeropuerto);
     }
 
+    public ArrayList<Aeropuerto> getAeropuertoPorCiudad(String ciudad) {
+        ArrayList<Aeropuerto> ans = new ArrayList<>();
+        for(var aeropuerto: listaAeropuertos) {
+            if(aeropuerto.getCiudad().equals(ciudad)) {
+                ans.add(aeropuerto);
+            }
+        }
+        return ans;
+    }
+    public boolean aeropuertoExiste(String codAeropuerto) {
+        boolean ans = false;
+        for(var aeropuerto: listaAeropuertos) {
+            if(aeropuerto.getCodigoAeropuerto().equals(codAeropuerto)) {
+                ans = true;
+            }
+        }
+        return ans;
+    }
+
 }
