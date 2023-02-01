@@ -36,8 +36,9 @@ public class Avion {
 
     @Override
     public String toString() {
-        return "Matrícula: " + matricula + "\nTipo avión: " + tipoAvionStr + "\nFabricante: " + fabricante + "\n";
+        return "Matrícula: " + matricula + " Tipo avión: " + tipoAvionStr + " Fabricante: " + fabricante + "\n";
     }
+
 
     public String getMatricula() {
         return matricula;

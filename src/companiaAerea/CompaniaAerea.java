@@ -1,7 +1,9 @@
 package companiaAerea;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
+import java.util.Set;
 
 public class CompaniaAerea {
     private Aeropuertos aeropuertos;
@@ -26,9 +28,10 @@ public class CompaniaAerea {
             System.out.println("3: Dar de alta pilotos");
             System.out.println("4: Dar de alta aeropuertos");
             System.out.println("5: Registrar vuelos");
-            System.out.println("6: Consultar vuelos ya sea por origen o por destino");
-            System.out.println("7: Consultar aeropuertos por ciudad");
-            System.out.println("8: Salir");
+            System.out.println("6: Consultar vuelos por origen");
+            System.out.println("7: Consultar vuelos por destino");
+            System.out.println("8: Consultar aeropuertos por ciudad");
+            System.out.println("9: Salir");
             System.out.print("Elige la opción que deseas realizar: ");
 
             int opcion = Integer.valueOf(read.nextLine());
@@ -45,15 +48,18 @@ public class CompaniaAerea {
                 pedirDatosAeropuertos(); continue;
             }
             if(opcion == 5) {
-                // TODO: registrar vuelos
+                pedirDatosVuelos(); continue;
             }
             if(opcion == 6) {
-                // TODO: consultar vuelos por origen o destino
+                mostrarVuelosPorOrigen(); continue;
             }
             if(opcion == 7) {
-                // TODO: consultar aeropuertos por ciudad
+                mostrarVuelosPorDestino(); continue;
             }
             if(opcion == 8) {
+                pedirDatosConsultarAeroPorCiudad(); continue;
+            }
+            if(opcion == 9) {
                 break;
             }
         }
@@ -102,11 +108,11 @@ public class CompaniaAerea {
             System.out.println("1: Carga\n 2: Pasajeros\n 3: Militar\n 4: Recreación\n 5: Excursión\n");
             System.out.print("Ingresa el tipo de licencia del piloto: ");
             int tipoPiloto = Integer.valueOf(read.nextLine());
+            System.out.print("Ingresa el nombre del piloto: ");
             String nombre = read.nextLine();
-            System.out.print("Ingresa la matrícula del piloto: ");
-            String matricula = read.nextLine();
-            Piloto piloto = new Piloto(tipoPiloto,nombre, matricula);
+            Piloto piloto = new Piloto(tipoPiloto,nombre);
             pilotos.agregarPiloto(piloto);
+            System.out.println("\nPiloto registrado correctamente\n");
         }
     }
 
@@ -118,10 +124,9 @@ public class CompaniaAerea {
             String ciudad = read.nextLine();
             System.out.print("Ingresa el país del aeropuerto: ");
             String pais = read.nextLine();
-            System.out.print("Ingresa el codigo del aeropuerto: ");
-            String codigo = read.nextLine();
-            Aeropuerto aeropuerto = new Aeropuerto(ciudad,pais,codigo);
+            Aeropuerto aeropuerto = new Aeropuerto(ciudad,pais,aeropuertos.getListaAeropuertos().size() + 1);
             aeropuertos.agregarAeropuerto(aeropuerto);
+            System.out.println("\nAeropuerto guardado correctamente");
         }
         System.out.print("\n");
     }
@@ -130,16 +135,94 @@ public class CompaniaAerea {
         System.out.print("¿Cuántos vuelos deseas registrar?: ");
         int cantidad = Integer.parseInt(read.nextLine());
         for(int curVuelo = 0; curVuelo < cantidad; curVuelo++) {
-            System.out.print("Ingresa la matricula del avion que realizó el vuelo: ");
+            System.out.println("1: Carga\n 2: Pasajeros\n 3: Militar\n 4: Recreación\n 5: Excursión\n");
+            System.out.print("Ingresa el tipo de avión del vuelo: ");
+            int tipoAvion = Integer.parseInt(read.nextLine());
+            aviones.imprimirAvionesPorTipo(tipoAvion);
+            if(aviones.getListaAviones().size() == 0) continue;
+            System.out.print("Ingresa el ID del avion que realizó el vuelo: ");
+            int idAvion = Integer.parseInt(read.nextLine());
+            if(aviones.obtenerAvion(idAvion).isEmpty()) {
+                System.out.println("\nEl avion con ese ID no está registrado");
+                continue;
+            }
 
-            System.out.print("Ingresa la matricula del avion que realizó el vuelo: ");
-            String matriculaAvion = read.nextLine(); // TODO: validar que exista esta matricula
-            System.out.print("Ingresa el código del aeropuerto de origen: ");
-            String aeropuertoOrigen = read.nextLine();
-            System.out.print("Ingresa el código del aeropuerto de destino: ");
-            String aeropuertoDestino = read.nextLine();
+            aeropuertos.imprimirAeropuertos();
+            if(aeropuertos.getListaAeropuertos().size() == 0) continue;
+            System.out.print("Ingresa el ID del aeropuerto de origen: ");
+            int aeropuertoOrigen = Integer.parseInt(read.nextLine()) ;
+            if(aeropuertos.obtenerAeropuerto(aeropuertoOrigen).isEmpty()) {
+                System.out.println("\nEl avion con esa ID no está registrado");
+                continue;
+            }
+
+
+            System.out.print("Ingresa el ID del aeropuerto de destino: ");
+            int aeropuertoDestino = Integer.parseInt(read.nextLine());
+            if(aeropuertos.obtenerAeropuerto(aeropuertoDestino).isEmpty()) {
+                System.out.println("\nEl avión con esa ID no está registrado");
+                continue;
+            }
+
+            pilotos.imprimirPilotos();
+            if(pilotos.getListaPilotos().size() == 0) continue;
+
+            System.out.print("Ingresa el piloto del vuelo: ");
+            int idPiloto = Integer.parseInt(read.nextLine());
+
+            System.out.print("Ingresa el día en el que se realizó el vuelo: ");
+            int dia = Integer.parseInt(read.nextLine());
+            System.out.print("Ingresa el mea en el que se realizó el vuelo: ");
+            int mes = Integer.parseInt(read.nextLine());
+            System.out.print("Ingresa el año en el que se realizó el vuelo: ");
+            int anio = Integer.parseInt(read.nextLine());
+            String fecha = dia + "/" + mes + "/" + anio;
+
+            vuelos.agregarVuelo(idAvion,aeropuertoOrigen,aeropuertoDestino,idPiloto,fecha);
 
         }
     }
+
+
+
+    public  void mostrarVuelosPorOrigen() {
+        aeropuertos.imprimirAeropuertos();
+        if(aeropuertos.getListaAeropuertos().size() == 0) return;
+        System.out.print("Ingresa el ID del aeropuerto de origen: ");
+        int idOrigen = Integer.parseInt(read.nextLine());
+        ArrayList<Vuelo> vuelosOrigen = vuelos.getVueloPorOrigen(idOrigen);
+        for(var vuelo: vuelosOrigen) System.out.println(vuelo);
+    }
+
+    public  void mostrarVuelosPorDestino() {
+        aeropuertos.imprimirAeropuertos();
+        if(aeropuertos.getListaAeropuertos().size() == 0) return;
+        System.out.print("Ingresa el ID del aeropuerto de destino: ");
+        int idDestino = Integer.parseInt(read.nextLine());
+        ArrayList<Vuelo> vuelosDestino = vuelos.getVuelosPorDestino(idDestino);
+        System.out.println(vuelosDestino.size());
+        for(var vuelo: vuelosDestino) System.out.println(vuelo);
+    }
+
+    public void pedirDatosConsultarAeroPorCiudad() {
+        Set<String> ciudades = aeropuertos.getCiudades();
+        int idx = 1;
+        for(var ciudad : ciudades) {
+            System.out.println(ciudad);
+        }
+        System.out.print("Ingresa el nombre de la ciudad: ");
+        String ciudad = read.nextLine();
+        ArrayList<Aeropuerto> aeropuertosCiudad = aeropuertos.getAeropuertoPorCiudad(ciudad);
+        if(aeropuertosCiudad.size() == 0) {
+            System.out.println("No hay ningún aeropuerto con esa ciudad"); return;
+        }
+        System.out.println("Estos son los aeropuertos que se encuentran en esa ciuadad: ");
+        for(var aeropuerto: aeropuertosCiudad) {
+            System.out.println(aeropuerto);
+        }
+
+    }
+
+
 
 }

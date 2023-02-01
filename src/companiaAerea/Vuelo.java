@@ -3,34 +3,42 @@ package companiaAerea;
 import java.util.Date;
 
 public class Vuelo {
-    private String matriculaAvion;
+    private int  idAvion;
     private Aeropuerto aeropuertoOrigen;
     private Aeropuerto aeropuertoDestino;
-    private String nombrePiloto;
-    private Date fechaVuelo;
+    private int idPiloto;
+    private String fechaVuelo;
 
-    public Vuelo(String matriculaAvion, Aeropuerto aeropuertoOrigen, Aeropuerto aeropuertoDestino, String nombrePiloto, Date fechaVuelo) {
-        this.matriculaAvion = matriculaAvion;
+    public Vuelo(int idAvion, Aeropuerto aeropuertoOrigen, Aeropuerto aeropuertoDestino, int idPiloto, String fechaVuelo) {
+        this.idAvion = idAvion;
         this.aeropuertoOrigen = aeropuertoOrigen;
         this.aeropuertoDestino = aeropuertoDestino;
-        this.nombrePiloto = nombrePiloto;
+        this.idPiloto = idPiloto;
         this.fechaVuelo = fechaVuelo;
     }
 
-    public Date getFechaVuelo() {
+    @Override
+    public String toString() {
+        return "Vuelo{" +
+                "Ciudad origen = " + aeropuertoOrigen.getCiudad() +
+                ", Ciudad destino = " + aeropuertoDestino.getCiudad() +
+                ", fechaVuelo = " + fechaVuelo + "}";
+    }
+
+    public String getFechaVuelo() {
         return fechaVuelo;
     }
 
-    public void setFechaVuelo(Date fechaVuelo) {
+    public void setFechaVuelo(String fechaVuelo) {
         this.fechaVuelo = fechaVuelo;
     }
 
-    public String getMatriculaAvion() {
-        return matriculaAvion;
+    public int getIdAvion() {
+        return idAvion;
     }
 
-    public void setMatriculaAvion(String matriculaAvion) {
-        this.matriculaAvion = matriculaAvion;
+    public void setIdAvion(int idAvion) {
+        this.idAvion = idAvion;
     }
 
     public Aeropuerto getAeropuertoOrigen() {
@@ -49,11 +57,11 @@ public class Vuelo {
         this.aeropuertoDestino = aeropuertoDestino;
     }
 
-    public String getNombrePiloto() {
-        return nombrePiloto;
+    public int getIdPiloto() {
+        return idPiloto;
     }
 
-    public void setNombrePiloto(String nombrePiloto) {
-        this.nombrePiloto = nombrePiloto;
+    public void setIdPiloto(int idPiloto) {
+        this.idPiloto = idPiloto;
     }
 }

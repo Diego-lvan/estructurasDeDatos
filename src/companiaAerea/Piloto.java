@@ -1,12 +1,18 @@
 package companiaAerea;public class Piloto {
     private int tipoLicencia;
     private String nombre;
-    private String matricula;
 
-    public Piloto(int tipoLicencia, String nombre, String matricula) {
+    @Override
+    public String toString() {
+        return " Piloto{" +
+                "tipoLicencia=" + tipoLicencia +
+                ", nombre='" + nombre + '\'' +
+                '}';
+    }
+
+    public Piloto(int tipoLicencia, String nombre) {
         this.tipoLicencia = tipoLicencia;
         this.nombre = nombre;
-        this.matricula = matricula;
     }
 
     public String getNombre() {

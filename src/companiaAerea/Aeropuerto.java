@@ -3,20 +3,29 @@ package companiaAerea;
 public class Aeropuerto {
     private String ciudad;
     private  String pais;
-    private String codigoAeropuerto;
 
-    public String getCodigoAeropuerto() {
-        return codigoAeropuerto;
+    private int id;
+
+    public int getId() {
+        return id;
     }
 
-    public void setCodigoAeropuerto(String codigoAeropuerto) {
-        this.codigoAeropuerto = codigoAeropuerto;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public Aeropuerto(String ciudad, String pais, String codigoAeropuerto) {
+    public Aeropuerto(String ciudad, String pais, int id) {
         this.ciudad = ciudad;
         this.pais = pais;
-        this.codigoAeropuerto = codigoAeropuerto;
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Aeropuerto{" +
+                "ciudad='" + ciudad + '\'' +
+                ", pais='" + pais + '\'' +
+                '}';
     }
 
     public String getCiudad() {
