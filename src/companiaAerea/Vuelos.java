@@ -15,17 +15,21 @@ public class Vuelos {
         this.aviones = aviones;
     }
     public boolean agregarVuelo(int idAvion, int IdOrigen, int IdDestino, int idPiloto, String fechaVuelo) {
+        // validar que el avion y aeropuertos existan
         if(aviones.obtenerAvion(idAvion).isEmpty()) return false;
         Optional<Aeropuerto> aeropuertoOrigen = aeropuertos.obtenerAeropuerto(IdOrigen);
         if(aeropuertoOrigen.isEmpty()) return false;
         Optional<Aeropuerto> aeropuertoDestino = aeropuertos.obtenerAeropuerto(IdDestino);
         if(aeropuertoDestino.isEmpty()) return false;
         if(aeropuertos.obtenerAeropuerto(IdDestino).isEmpty()) return false;
+
         Vuelo vuelo = new Vuelo(idAvion,aeropuertoOrigen.get(),aeropuertoDestino.get(),idPiloto,fechaVuelo);
         vuelos.add(vuelo);
         return true;
     }
 
+
+    // regresa los vuelos con el aeropuerto de origen especificado
     public ArrayList<Vuelo> getVueloPorOrigen(int origenID) {
         ArrayList<Vuelo> ans = new ArrayList<>();
         for(int idx = 0; idx < vuelos.size(); idx++) {
@@ -35,6 +39,8 @@ public class Vuelos {
         }
         return ans;
     }
+
+    // regresa los vuelos con el aeropuerto de destino especificado
 
     public ArrayList<Vuelo> getVuelosPorDestino(int idDestino) {
         ArrayList<Vuelo> ans = new ArrayList<>();

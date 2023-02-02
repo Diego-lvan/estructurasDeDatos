@@ -18,25 +18,16 @@ public class CompaniaAerea {
         aviones = new Aviones();
         vuelos = new Vuelos(aeropuertos, aviones);
 
-        mostrarMenu();
+        iniciar();
     }
 
-    public void mostrarMenu() {
-        while(true) {
-            System.out.println("1: Dar de alta aviones y sus datos");
-            System.out.println("2: Consultar aviones por tipo");
-            System.out.println("3: Dar de alta pilotos");
-            System.out.println("4: Dar de alta aeropuertos");
-            System.out.println("5: Registrar vuelos");
-            System.out.println("6: Consultar vuelos por origen");
-            System.out.println("7: Consultar vuelos por destino");
-            System.out.println("8: Consultar aeropuertos por ciudad");
-            System.out.println("9: Salir");
-            System.out.print("Elige la opción que deseas realizar: ");
 
-            int opcion = Integer.valueOf(read.nextLine());
+    public void iniciar() {
+        while(true) {
+            mostrarMenu();
+            int opcion = Integer.parseInt(read.nextLine());
             if(opcion == 1) {
-                pedirDatosDeAviones(); continue;
+                pedirDatosRegistrarAviones(); continue;
             }
             if(opcion == 2) {
                 pedirDatosConsultarAvionesTipo(); continue;
@@ -57,7 +48,7 @@ public class CompaniaAerea {
                 mostrarVuelosPorDestino(); continue;
             }
             if(opcion == 8) {
-                pedirDatosConsultarAeroPorCiudad(); continue;
+                consultarAeroPorCiudad(); continue;
             }
             if(opcion == 9) {
                 break;
@@ -66,7 +57,8 @@ public class CompaniaAerea {
 
     }
 
-    public  void pedirDatosDeAviones() {
+
+    public  void pedirDatosRegistrarAviones() {
         System.out.print("¿Cuántos aviones deseas registrar?: ");
         int cantidad = Integer.valueOf(read.nextLine()) ;
         for(int curAvion = 0; curAvion < cantidad; curAvion++) {
@@ -172,7 +164,7 @@ public class CompaniaAerea {
 
             System.out.print("Ingresa el día en el que se realizó el vuelo: ");
             int dia = Integer.parseInt(read.nextLine());
-            System.out.print("Ingresa el mea en el que se realizó el vuelo: ");
+            System.out.print("Ingresa el mes en el que se realizó el vuelo: ");
             int mes = Integer.parseInt(read.nextLine());
             System.out.print("Ingresa el año en el que se realizó el vuelo: ");
             int anio = Integer.parseInt(read.nextLine());
@@ -204,7 +196,7 @@ public class CompaniaAerea {
         for(var vuelo: vuelosDestino) System.out.println(vuelo);
     }
 
-    public void pedirDatosConsultarAeroPorCiudad() {
+    public void consultarAeroPorCiudad() {
         Set<String> ciudades = aeropuertos.getCiudades();
         int idx = 1;
         for(var ciudad : ciudades) {
@@ -222,6 +214,20 @@ public class CompaniaAerea {
         }
 
     }
+
+    private void mostrarMenu() {
+        System.out.println("1: Dar de alta aviones y sus datos");
+        System.out.println("2: Consultar aviones por tipo");
+        System.out.println("3: Dar de alta pilotos");
+        System.out.println("4: Dar de alta aeropuertos");
+        System.out.println("5: Registrar vuelos");
+        System.out.println("6: Consultar vuelos por origen");
+        System.out.println("7: Consultar vuelos por destino");
+        System.out.println("8: Consultar aeropuertos por ciudad");
+        System.out.println("9: Salir");
+        System.out.print("Elige la opción que deseas realizar: ");
+    }
+
 
 
 

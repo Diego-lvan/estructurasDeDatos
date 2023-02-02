@@ -25,6 +25,9 @@ public class Aeropuertos {
         return listaAeropuertos.add(aeropuerto);
     }
 
+
+    // filtra los aeropuertos por una ciuadad especificada
+
     public ArrayList<Aeropuerto> getAeropuertoPorCiudad(String ciudad) {
         ArrayList<Aeropuerto> ans = new ArrayList<>();
         for(var aeropuerto: listaAeropuertos) {
@@ -53,6 +56,8 @@ public class Aeropuertos {
         }
     }
 
+
+    // regresa un set con las ciudades disponibles
     public Set<String> getCiudades() {
         Set<String> ciudades = new HashSet<>();
         for(var aeropuertos: listaAeropuertos) {

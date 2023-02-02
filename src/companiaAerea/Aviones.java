@@ -17,11 +17,9 @@ public class Aviones {
     public boolean agregarAvion(Avion avion) {
         return listaAviones.add(avion);
     }
-    public void imprimirAviones() {
-        for(int id = 1; id <= listaAviones.size(); id++) {
-            System.out.println(id + " -> " + listaAviones.get(id - 1));
-        }
-    }
+
+
+    // obtiene los aviones de un tipo especificado
     public ArrayList<Avion> getPorTipo(int tipoAvion) {
         ArrayList<Avion> res = new ArrayList<>();
         for(var avion : listaAviones) {
