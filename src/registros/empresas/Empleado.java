@@ -20,7 +20,20 @@ public class Empleado {
         this.numeroEmpleado = numeroEmpleado;
         this.nombre = nombre;
         this.edad = edad;
+        comisionesAnio = new ListaEstatica(12);
     }
+
+    public double obtenerPromedio() {
+        if(comisionesAnio.cantidad() == 0) return 0.0;
+        double promedio = 0.0;
+        for(int mes = 0; mes < comisionesAnio.cantidad(); mes++) {
+            promedio += (double) comisionesAnio.obtener(mes);
+        }
+        promedio /= comisionesAnio.cantidad();
+        return promedio;
+    }
+
+
 
     @Override
     public String toString() {
